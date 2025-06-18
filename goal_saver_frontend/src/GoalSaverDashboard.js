@@ -415,43 +415,66 @@ export default function GoalSaverDashboard() {
                 </div>
               </div>
             )}
-            {/* Auto Reminders & Habit Builder */}
-            {selectedGoal && (
-              <div style={cardStyle}>
-                <div
-                  style={{
-                    fontWeight: 600,
-                    fontSize: 17,
-                    color: COLORS.accent,
-                    marginBottom: 8,
-                  }}
-                >
-                  Reminders & Habit Builder
-                </div>
-                <div style={{ fontSize: 14, color: COLORS.muted }}>
-                  <span>
-                    <b>Reminder:</b> We’ll nudge you <span style={{ color: COLORS.secondary }}>
-                      {getReminderPhrase(selectedGoal.reminderFreq)}
-                    </span> to save towards <b>{selectedGoal.name}</b>.
-                  </span>
-                  <br />
-                  <span>
-                    <b>Habit tip:</b>{" "}
-                    {selectedGoal.microHabit
-                      ? selectedGoal.microHabit
-                      : "Set up a recurring micro-saving action to make progress effortless."}
-                  </span>
-                </div>
-                <button
-                  style={btnStyle(COLORS.accent, "white", { marginTop: 16 })}
-                  onClick={() =>
-                    alert("Reminder API (mock): You’ll receive notifications based on your plan!")
-                  }
-                >
-                  Simulate Reminder
-                </button>
+            {/* Auto Reminders & Habit Builder (Simulated Disabled) */}
+            <div style={{
+              ...cardStyle,
+              opacity: 0.5,
+              filter: "grayscale(0.5)",
+              background: "#f5f5f5",
+              border: `2px dashed ${COLORS.secondary}`,
+              position: "relative",
+            }}>
+              <div
+                style={{
+                  fontWeight: 600,
+                  fontSize: 17,
+                  color: COLORS.secondary,
+                  marginBottom: 8
+                }}
+              >
+                Reminders & Habit Builder <span style={{
+                  fontWeight: 600,
+                  color: "#f44336",
+                  fontSize: 16,
+                  marginLeft: 8
+                }}>(Unavailable)</span>
               </div>
-            )}
+              <div style={{
+                fontSize: 14,
+                color: COLORS.muted,
+                marginBottom: 4,
+              }}>
+                <span><b>Notice:</b> The Reminders feature is currently <b>disabled</b> for your account.<br />
+                  <span style={{ color: "#b71c1c" }}><b>
+                    Enable coming soon!
+                  </b></span>
+                </span>
+                <br /><br />
+                <span>
+                  Schedule savings reminders and build micro-saving habits will be available in a future Pro release.
+                </span>
+              </div>
+              <button
+                style={btnStyle(COLORS.secondary, "#fff", { marginTop: 14, cursor: "not-allowed" })}
+                disabled
+                title="Reminders are unavailable"
+              >
+                Reminders Unavailable
+              </button>
+              <div style={{
+                position: "absolute",
+                top: 6, right: 18,
+                background: "#fff3e0",
+                color: "#b71c1c",
+                padding: "2px 10px",
+                borderRadius: 6,
+                fontWeight: 500,
+                fontSize: 13,
+                boxShadow: `0 1px 2px ${COLORS.shadow}`,
+              }}>
+                <span role="img" aria-label="locked">🔒</span> Feature Locked
+              </div>
+            </div>
             {/* Progress/Milestones */}
             {selectedGoal && (
               <div style={{ ...cardStyle, background: "#F7FAFE" }}>
@@ -537,6 +560,121 @@ export default function GoalSaverDashboard() {
             </form>
           </Modal>
         )}
+      </div>
+      {/* Enhanced GoalStack Features (Simulated, Demo UI) */}
+      <div style={{
+        maxWidth: 1040,
+        margin: "56px auto 0 auto",
+        padding: "0 32px 24px 32px",
+        transition: "background 0.3s"
+      }}>
+        <h2 style={{
+          color: COLORS.primary,
+          letterSpacing: 0.5,
+          fontWeight: 700,
+          marginTop: 24,
+          marginBottom: 14,
+          textAlign: "center",
+        }}>
+          🚀 Enhanced GoalStack Experiences
+        </h2>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+          gap: "20px"
+        }}>
+          {/* 1. Goal Templates */}
+          <FeatureCard
+            icon="📚"
+            title="Goal Templates"
+            description="Choose from pre-made goal templates (Travel, Gadgets, Emergency Fund, etc.). Kickstart saving with best-practice targets and micro-habits auto-filled!"
+            demoTag="NEW"
+          />
+          {/* 2. Goal Bundles */}
+          <FeatureCard
+            icon="🎯"
+            title="Goal Bundles"
+            description="Group related saving goals into bundles (e.g. Wedding Bundle: Venue, Dress, Honeymoon) and track their collective progress."
+            demoTag="DEMO"
+          />
+          {/* 3. Widget Support */}
+          <FeatureCard
+            icon="🧩"
+            title="Widget Support"
+            description="Add live savings goal widgets to your phone or desktop home screen and monitor progress at a glance."
+            comingSoon
+          />
+          {/* 4. Level-Up System */}
+          <FeatureCard
+            icon="🔥"
+            title="Level-Up System"
+            description="Unlock new levels and earn badges as you achieve savings streaks, reach goals, or try advanced features. Gamify your money journey!"
+            demoTag="HOT"
+          />
+          {/* 5. Daily Savings Quiz */}
+          <FeatureCard
+            icon="❓"
+            title="Daily Savings Quiz"
+            description="Take a daily short quiz to reinforce good savings habits and earn rewards. Fun and educational!"
+          />
+          {/* 6. "Lock It & Leave It" Mode */}
+          <FeatureCard
+            icon="🔒"
+            title='"Lock It & Leave It" Mode'
+            description="Temporarily lock your progress to prevent withdrawals and boost discipline for a set period ('saving fast')."
+          />
+          {/* 7. Mystery Reward Days */}
+          <FeatureCard
+            icon="🎁"
+            title="Mystery Reward Days"
+            description="On select days, meeting your savings target unlocks a surprise reward. Stay curious and consistent!"
+          />
+          {/* 8. Sync with Google Calendar / Reminders */}
+          <FeatureCard
+            icon="📆"
+            title="Calendar / Reminder Sync"
+            description="(Preview) Connect your Google Calendar to auto-track savings reminders and deadlines with one click."
+            comingSoon
+          />
+          {/* 9. Goal Journal */}
+          <FeatureCard
+            icon="📓"
+            title="Goal Journal"
+            description="Write daily/weekly reflections on your savings journey, set affirmations, and celebrate small wins."
+            demoTag="BETA"
+          />
+          {/* 10. Night Mode Savings Prompt */}
+          <FeatureCard
+            icon="🌙"
+            title="Night Mode Prompt"
+            description="Get a friendly evening check-in to log your savings or journal your progress before bed. (Night mode preview!)"
+          />
+          {/* 11. Public Goal Showcase */}
+          <FeatureCard
+            icon="🌐"
+            title="Public Goal Showcase"
+            description="Share select goals & milestones (no amounts) with friends or community to inspire and be inspired."
+          />
+          {/* 12. GoalStack Pro */}
+          <FeatureCard
+            icon="⭐"
+            title="GoalStack Pro"
+            description="Unlock Pro features (advanced analytics, export data, detailed insights, premium themes)."
+            comingSoon
+          />
+          {/* 13. Partner Discounts */}
+          <FeatureCard
+            icon="🤝"
+            title="Partner Discounts"
+            description="Enjoy special offers from finance, travel, and shopping partners when you achieve your savings targets!"
+          />
+          {/* 14. Community Challenges */}
+          <FeatureCard
+            icon="🏅"
+            title="Community Challenges"
+            description="Join public challenges, compete on streaks, and celebrate as a part of the GoalSaver community."
+          />
+        </div>
       </div>
       <footer style={{
         maxWidth: 1040, padding: 30, margin: '40px auto 0 auto', color: COLORS.muted, textAlign: "center", fontSize: 14
@@ -643,6 +781,71 @@ function MilestoneList({ goal }) {
         );
       })}
     </ul>
+  );
+}
+
+/**
+ * PUBLIC_INTERFACE
+ * Renders a feature card for the GoalStack enhancements section.
+ */
+function FeatureCard({ icon, title, description, demoTag, comingSoon }) {
+  return (
+    <div style={{
+      background: "#fff",
+      borderRadius: 13,
+      border: `1.5px solid ${COLORS.border}`,
+      boxShadow: "0 2px 10px rgba(120, 148, 180, 0.09)",
+      padding: "21px 19px 16px 19px",
+      minHeight: 165,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      position: "relative"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
+        <span style={{ fontSize: 29, marginTop: -2, marginRight: 6 }}>{icon}</span>
+        <span style={{
+          color: COLORS.accent,
+          fontWeight: 700,
+          fontSize: 18,
+        }}>{title}</span>
+        {demoTag && (
+          <span style={{
+            marginLeft: 8,
+            background: COLORS.secondary,
+            color: "#fff",
+            fontSize: 12.5,
+            fontWeight: 600,
+            borderRadius: 6,
+            padding: "1px 7px",
+            letterSpacing: "0.5px"
+          }}>{demoTag}</span>
+        )}
+        {comingSoon && (
+          <span style={{
+            marginLeft: 8,
+            background: "#e1e6fa",
+            color: "#5a6fa9",
+            fontSize: 12.5,
+            fontWeight: 600,
+            borderRadius: 6,
+            padding: "1px 7px",
+            border: `1px dashed ${COLORS.secondary}`,
+            letterSpacing: "0.5px"
+          }}>Coming Soon</span>
+        )}
+      </div>
+      <p style={{
+        margin: "15px 0 0 2px",
+        fontSize: 15,
+        color: COLORS.muted,
+        fontWeight: 500,
+        lineHeight: 1.34,
+        flex: 1,
+      }}>
+        {description}
+      </p>
+    </div>
   );
 }
 
