@@ -415,65 +415,109 @@ export default function GoalSaverDashboard() {
                 </div>
               </div>
             )}
-            {/* Auto Reminders & Habit Builder (Simulated Disabled) */}
+            {/* Reminders & Habit Builder (Enabled and Interactive) */}
             <div style={{
               ...cardStyle,
-              opacity: 0.5,
-              filter: "grayscale(0.5)",
-              background: "#f5f5f5",
-              border: `2px dashed ${COLORS.secondary}`,
+              background: "#fff8e1",
+              border: `2px solid ${COLORS.secondary}`,
+              boxShadow: `0 2px 10px ${COLORS.shadow}`,
               position: "relative",
+              opacity: 1,
+              filter: "none",
+              transition: "all 0.2s"
             }}>
               <div
                 style={{
                   fontWeight: 600,
                   fontSize: 17,
                   color: COLORS.secondary,
-                  marginBottom: 8
+                  marginBottom: 8,
+                  display: "flex",
+                  alignItems: "center"
                 }}
               >
                 Reminders & Habit Builder <span style={{
+                  marginLeft: 10,
+                  background: COLORS.primary,
+                  color: "#fff",
+                  fontSize: 13,
                   fontWeight: 600,
-                  color: "#f44336",
-                  fontSize: 16,
-                  marginLeft: 8
-                }}>(Unavailable)</span>
+                  borderRadius: 6,
+                  padding: "2px 9px",
+                  letterSpacing: ".5px"
+                }}>ENABLED</span>
               </div>
               <div style={{
-                fontSize: 14,
+                fontSize: 15,
                 color: COLORS.muted,
-                marginBottom: 4,
+                marginBottom: 8,
               }}>
-                <span><b>Notice:</b> The Reminders feature is currently <b>disabled</b> for your account.<br />
-                  <span style={{ color: "#b71c1c" }}><b>
-                    Enable coming soon!
-                  </b></span>
-                </span>
-                <br /><br />
-                <span>
-                  Schedule savings reminders and build micro-saving habits will be available in a future Pro release.
+                <b>Auto Reminders:</b>&nbsp;
+                Get friendly nudges to save {selectedGoal?.reminderFreq && <b>{getReminderPhrase(selectedGoal.reminderFreq)}</b>}.
+                <br />
+                <span style={{ color: COLORS.text, fontWeight: 500 }}>
+                  Boost consistency with micro-saving habits tailored to your goal.
                 </span>
               </div>
-              <button
-                style={btnStyle(COLORS.secondary, "#fff", { marginTop: 14, cursor: "not-allowed" })}
-                disabled
-                title="Reminders are unavailable"
+              <form
+                onSubmit={e => { e.preventDefault(); alert('Reminder set! (Demo)'); }}
+                style={{
+                  marginTop: 12,
+                  display: "flex",
+                  gap: 8,
+                  alignItems: "center"
+                }}
               >
-                Reminders Unavailable
-              </button>
-              <div style={{
-                position: "absolute",
-                top: 6, right: 18,
-                background: "#fff3e0",
-                color: "#b71c1c",
-                padding: "2px 10px",
-                borderRadius: 6,
-                fontWeight: 500,
-                fontSize: 13,
-                boxShadow: `0 1px 2px ${COLORS.shadow}`,
-              }}>
-                <span role="img" aria-label="locked">🔒</span> Feature Locked
-              </div>
+                <label style={
+                  { ...labelStyle, marginBottom: 0 }
+                }>
+                  Reminder Frequency
+                  <select
+                    style={{
+                      ...inputStyle,
+                      width: 115,
+                      marginLeft: 8,
+                      fontWeight: 500,
+                      fontSize: 14,
+                      padding: "6px 11px"
+                    }}
+                    name="reminderFreq"
+                    value={selectedGoal?.reminderFreq || "Weekly"}
+                    onChange={e => {
+                      const value = e.target.value;
+                      setGoals(gs => gs.map(g =>
+                        g.id === selectedGoalId ? { ...g, reminderFreq: value } : g
+                      ));
+                    }}
+                  >
+                    {["Daily", "Weekly", "Monthly"].map(freq => (
+                      <option key={freq} value={freq}>{capitalize(freq)}</option>
+                    ))}
+                  </select>
+                </label>
+                <button
+                  type="submit"
+                  style={btnStyle(COLORS.secondary, "#fff", { marginLeft: 10, fontWeight: 600 })}
+                  title="Save reminder frequency"
+                >
+                  Set
+                </button>
+              </form>
+              {selectedGoal?.microHabit && (
+                <div style={{
+                  marginTop: 18,
+                  background: "#fffde7",
+                  borderRadius: 7,
+                  padding: "8px 13px",
+                  color: COLORS.accent,
+                  fontWeight: 500,
+                  fontSize: 14,
+                  boxShadow: `0 1.5px 5px ${COLORS.shadow}`
+                }}>
+                  <span role="img" aria-label="habit" style={{ marginRight: 7 }}>🌱</span>
+                  <span>{selectedGoal.microHabit}</span>
+                </div>
+              )}
             </div>
             {/* Progress/Milestones */}
             {selectedGoal && (
